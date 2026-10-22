@@ -32,9 +32,16 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
+
+# local caches (LinkedIn, Tracxn, board, Jev) — never commit
+.data/
+
+# All In Capital flag. Keep the file on the machine that runs the app.
+/public/all-in-logo.png
 
 # typescript
 *.tsbuildinfo

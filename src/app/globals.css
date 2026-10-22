@@ -1,26 +1,185 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f9fafb;
+  --surface: #ffffff;
+  --surface-muted: #f3f4f6;
+  --foreground: #111827;
+  --muted: #6b7280;
+  --muted-2: #9ca3af;
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  --accent: #111827;
+  --sidebar-active: #f3f4f6;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-sidebar-active: var(--sidebar-active);
+  --font-sans: var(--font-jakarta);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  color-scheme: light;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.015em;
+}
+
+::selection {
+  background: #111827;
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.88);
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in {
+  animation: fade-in 0.25s ease-out both;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.skeleton-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.04) 25%,
+    rgba(0, 0, 0, 0.09) 37%,
+    rgba(0, 0, 0, 0.04) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+.skeleton-shimmer-on-dark {
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.16) 37%,
+    rgba(255, 255, 255, 0.06) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.slide-in {
+  animation: slide-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(36px) scale(0.92) rotate(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+.card-rise {
+  animation: card-rise 0.48s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.signin-field {
+  border-color: #d4d4d4;
+}
+.signin-field:focus {
+  border-color: #171717;
+}
+.signin-box {
+  width: 48px;
+  height: 54px;
+  border-color: #e5e5e5;
+}
+.signin-box:focus {
+  border-color: #171717;
+}
+
+@keyframes callout-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.callout-fade-in {
+  animation: callout-fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+/* Reply tray: same motion as the callout but NO delay — it must appear the
+   instant a founder reply lands, never sit invisible for half a second. */
+.reply-tray-in {
+  animation: callout-fade-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
